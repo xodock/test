@@ -9,14 +9,14 @@ class CommentController extends Controller
 {
     function create(Request $request)
     {
-        $comment = Comment::create(['body' => $request->body]);
+        $comment = Comment::create($request->toArray());
         return $comment->toJson();
     }
 
     function read(Request $request, $id = null)
     {
         if (!$id)
-            return Comment::getAllRoot()->toJson();
+            return Comment::getCommentsTree()->toJson();
         return Comment::find($id)->toJson();
     }
 

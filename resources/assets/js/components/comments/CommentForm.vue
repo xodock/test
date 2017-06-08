@@ -1,7 +1,8 @@
 <template>
     <div class="container">
-        <h4>Add Comment</h4>
-        <form action="" @submit.prevent="edit ? comments.editComment(comment.id) : comments.createComment()">
+        <h4 v-show="!answer">Add Comment</h4>
+        <h4 v-show="answer">Answer Comment</h4>
+        <form action="" @submit.prevent="edit ? comments.updateComment(comment.id) : comments.createComment()">
             <div class="input-group">
                 <textarea name="comment_body" v-model="comment.body" ref="textarea" class="form-control"></textarea>
             </div>
@@ -14,6 +15,6 @@
 </template>
 <script>
     export default{
-        props: ['comments', 'comment', 'edit'],
+        props: ['comments', 'comment', 'edit', 'answer'],
     }
 </script>

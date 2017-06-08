@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
 {
-    protected $fillable = ['body'];
+    protected $with = [
+        'answers'
+    ];
+    protected $fillable = ['body', 'parent_id'];
 
-    public function children()
+    public function answers()
     {
         return $this->hasMany(Comment::class, 'parent_id');
     }
@@ -18,8 +21,15 @@ class Comment extends Model
         return $this->belongsTo(Comment::class, 'parent_id');
     }
 
-    public static function getAllRoot()
+    public static function getCommentsTree()
     {
-        return self::has('children', '<', 1)->get();
+        return self::hasNot('parent')->get();
+    }
+
+    public static function hasNot($rel)
+    {
+        if (!$rel)
+            return false;
+        return self::has($rel, '<', 1);
     }
 }

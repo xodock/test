@@ -902,7 +902,6 @@
 
         Vue.component('comments', __webpack_require__(39));
         Vue.component('comment', __webpack_require__(37));
-        Vue.component('answers', __webpack_require__(57));
         Vue.component('commentForm', __webpack_require__(38));
 
         var app = new Vue({
@@ -1793,6 +1792,10 @@
 //
 //
 //
+//
+//
+//
+//
 
         /* harmony default export */
         __webpack_exports__["default"] = ({
@@ -1870,10 +1873,13 @@
             },
 
             methods: {
-                loadAnswers: function loadAnswers(comment) {
-                    this.$http.get("comments/" + comment.id).then(function (response) {
-                        //used the next syntax to make new root-level property reactive
-                        this.$set(comment, 'answers', response.data);
+                loadAnswers: function loadAnswers(comment_id) {
+                    this.$http.get("comments/" + comment_id).then(function (response) {
+                        for (var i = 0; i < this.comments.length; i++) {
+                            if (this.comments[i].id == comment_id) {
+                                this.comment.answers = response.data;
+                            }
+                        }
                     });
                 },
 
@@ -1912,11 +1918,15 @@
                     });
                 },
 
-                editComment: function editComment(comment) {
-                    this.comment.body = comment.body;
-                    this.comment.id = comment.id;
-                    this.comment.parent_id = comment.parent_id;
-                    this.edit = true;
+                editComment: function editComment(comment_id) {
+                    for (var i = 0; i < this.comments.length; i++) {
+                        if (this.comments[i].id == comment_id) {
+                            this.comment.body = this.comments[i].body;
+                            this.comment.id = this.comments[i].id;
+                            this.comment.parent_id = this.comments[i].parent_id;
+                            this.edit = true;
+                        }
+                    }
                 },
 
                 answerComment: function answerComment(comment_id) {
@@ -1991,10 +2001,10 @@
     /***/ (function (module, exports) {
 
         /*!
- * Bootstrap v3.3.7 (http://getbootstrap.com)
- * Copyright 2011-2016 Twitter, Inc.
- * Licensed under the MIT license
- */
+         * Bootstrap v3.3.7 (http://getbootstrap.com)
+         * Copyright 2011-2016 Twitter, Inc.
+         * Licensed under the MIT license
+         */
 
         if (typeof jQuery === 'undefined') {
             throw new Error('Bootstrap\'s JavaScript requires jQuery')
@@ -4406,18 +4416,18 @@
 
         var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;
         /*!
- * jQuery JavaScript Library v3.2.1
- * https://jquery.com/
- *
- * Includes Sizzle.js
- * https://sizzlejs.com/
- *
- * Copyright JS Foundation and other contributors
- * Released under the MIT license
- * https://jquery.org/license
- *
- * Date: 2017-03-20T18:59Z
- */
+         * jQuery JavaScript Library v3.2.1
+         * https://jquery.com/
+         *
+         * Includes Sizzle.js
+         * https://sizzlejs.com/
+         *
+         * Copyright JS Foundation and other contributors
+         * Released under the MIT license
+         * https://jquery.org/license
+         *
+         * Date: 2017-03-20T18:59Z
+         */
         (function (global, factory) {
 
             "use strict";
@@ -4945,15 +4955,15 @@
 
             var Sizzle =
                 /*!
- * Sizzle CSS Selector Engine v2.3.3
- * https://sizzlejs.com/
- *
- * Copyright jQuery Foundation and other contributors
- * Released under the MIT license
- * http://jquery.org/license
- *
- * Date: 2016-08-08
- */
+                 * Sizzle CSS Selector Engine v2.3.3
+                 * https://sizzlejs.com/
+                 *
+                 * Copyright jQuery Foundation and other contributors
+                 * Released under the MIT license
+                 * http://jquery.org/license
+                 *
+                 * Date: 2016-08-08
+                 */
                 (function (window) {
 
                     var i,
@@ -7651,7 +7661,6 @@
             var rnothtmlwhite = ( /[^\x20\t\r\n\f]+/g );
 
 
-
 // Convert String-formatted options into Object-formatted ones
             function createOptions(options) {
                 var object = {};
@@ -8587,7 +8596,6 @@
             var dataUser = new Data();
 
 
-
 //	Implementation Summary
 //
 //	1. Enforce API surface and semantic compatibility with 1.9.x branch
@@ -9100,7 +9108,6 @@
             var rtagName = ( /<([a-z][^\/\0>\x20\t\r\n\f]+)/i );
 
             var rscriptType = ( /^$|\/(?:java|ecma)script/i );
-
 
 
 // We have to close these tags to support XHTML (#13200)
@@ -12744,7 +12751,6 @@
             var nonce = jQuery.now();
 
             var rquery = ( /\?/ );
-
 
 
 // Cross-browser xml parsing
@@ -31998,13 +32004,13 @@
             /* script */
             __webpack_require__(29),
             /* template */
-            __webpack_require__(40),
+            __webpack_require__(42),
             /* scopeId */
             null,
             /* cssModules */
             null
         )
-        Component.options.__file = "D:\\Projects\\PS\\test_solar\\resources\\assets\\js\\components\\comments\\Comment.vue"
+        Component.options.__file = "/home/vagrant/Code/test-solar/resources/assets/js/components/comments/Comment.vue"
         if (Component.esModule && Object.keys(Component.esModule).some(function (key) {
                 return key !== "default" && key !== "__esModule"
             })) {
@@ -32022,9 +32028,9 @@
                 if (!hotAPI.compatible) return
                 module.hot.accept()
                 if (!module.hot.data) {
-                    hotAPI.createRecord("data-v-119fd3ac", Component.options)
+                    hotAPI.createRecord("data-v-e95d60c4", Component.options)
                 } else {
-                    hotAPI.reload("data-v-119fd3ac", Component.options)
+                    hotAPI.reload("data-v-e95d60c4", Component.options)
                 }
             })()
         }
@@ -32041,13 +32047,13 @@
             /* script */
             __webpack_require__(30),
             /* template */
-            __webpack_require__(41),
+            __webpack_require__(40),
             /* scopeId */
             null,
             /* cssModules */
             null
         )
-        Component.options.__file = "D:\\Projects\\PS\\test_solar\\resources\\assets\\js\\components\\comments\\CommentForm.vue"
+        Component.options.__file = "/home/vagrant/Code/test-solar/resources/assets/js/components/comments/CommentForm.vue"
         if (Component.esModule && Object.keys(Component.esModule).some(function (key) {
                 return key !== "default" && key !== "__esModule"
             })) {
@@ -32065,9 +32071,9 @@
                 if (!hotAPI.compatible) return
                 module.hot.accept()
                 if (!module.hot.data) {
-                    hotAPI.createRecord("data-v-172f9890", Component.options)
+                    hotAPI.createRecord("data-v-22fdcb82", Component.options)
                 } else {
-                    hotAPI.reload("data-v-172f9890", Component.options)
+                    hotAPI.reload("data-v-22fdcb82", Component.options)
                 }
             })()
         }
@@ -32084,13 +32090,13 @@
             /* script */
             __webpack_require__(31),
             /* template */
-            __webpack_require__(42),
+            __webpack_require__(41),
             /* scopeId */
             null,
             /* cssModules */
             null
         )
-        Component.options.__file = "D:\\Projects\\PS\\test_solar\\resources\\assets\\js\\components\\comments\\Comments.vue"
+        Component.options.__file = "/home/vagrant/Code/test-solar/resources/assets/js/components/comments/Comments.vue"
         if (Component.esModule && Object.keys(Component.esModule).some(function (key) {
                 return key !== "default" && key !== "__esModule"
             })) {
@@ -32108,9 +32114,9 @@
                 if (!hotAPI.compatible) return
                 module.hot.accept()
                 if (!module.hot.data) {
-                    hotAPI.createRecord("data-v-260642f7", Component.options)
+                    hotAPI.createRecord("data-v-3af77576", Component.options)
                 } else {
-                    hotAPI.reload("data-v-260642f7", Component.options)
+                    hotAPI.reload("data-v-3af77576", Component.options)
                 }
             })()
         }
@@ -32121,66 +32127,6 @@
         /***/
     }),
     /* 40 */
-    /***/ (function (module, exports, __webpack_require__) {
-
-        module.exports = {
-            render: function () {
-                var _vm = this;
-                var _h = _vm.$createElement;
-                var _c = _vm._self._c || _h;
-                return _c('div', {
-                    staticClass: "media-body container"
-                }, [_c('p', {
-                    staticClass: "id"
-                }, [_vm._v(_vm._s(_vm.comment.id))]), _vm._v(" "), _c('p', {
-                    staticClass: "comment_body"
-                }, [_vm._v(_vm._s(_vm.comment.body))]), _vm._v(" "), _c('a', {
-                    staticClass: "btn btn-default",
-                    on: {
-                        "click": function ($event) {
-                            _vm.comments.editComment(_vm.comment)
-                        }
-                    }
-                }, [_vm._v("Edit")]), _vm._v(" "), _c('a', {
-                    staticClass: "btn btn-danger",
-                    on: {
-                        "click": function ($event) {
-                            _vm.comments.deleteComment(_vm.comment.id)
-                        }
-                    }
-                }, [_vm._v("Delete")]), _vm._v(" "), _c('a', {
-                    staticClass: "btn btn-default",
-                    on: {
-                        "click": function ($event) {
-                            _vm.comments.answerComment(_vm.comment.id)
-                        }
-                    }
-                }, [_vm._v("Answer")]), _vm._v(" "), _c('a', {
-                    staticClass: "btn btn-default",
-                    on: {
-                        "click": function ($event) {
-                            _vm.comments.loadAnswers(_vm.comment)
-                        }
-                    }
-                }, [_vm._v("Show Comments")]), _vm._v(" "), _c('answers', {
-                    attrs: {
-                        "answers": _vm.comment.answers,
-                        "comments": _vm.comments
-                    }
-                })], 1)
-            }, staticRenderFns: []
-        }
-        module.exports.render._withStripped = true
-        if (false) {
-            module.hot.accept()
-            if (module.hot.data) {
-                require("vue-hot-reload-api").rerender("data-v-119fd3ac", module.exports)
-            }
-        }
-
-        /***/
-    }),
-    /* 41 */
     /***/ (function (module, exports, __webpack_require__) {
 
         module.exports = {
@@ -32270,13 +32216,13 @@
         if (false) {
             module.hot.accept()
             if (module.hot.data) {
-                require("vue-hot-reload-api").rerender("data-v-172f9890", module.exports)
+                require("vue-hot-reload-api").rerender("data-v-22fdcb82", module.exports)
             }
         }
 
         /***/
     }),
-    /* 42 */
+    /* 41 */
     /***/ (function (module, exports, __webpack_require__) {
 
         module.exports = {
@@ -32311,7 +32257,23 @@
         if (false) {
             module.hot.accept()
             if (module.hot.data) {
-                require("vue-hot-reload-api").rerender("data-v-260642f7", module.exports)
+                require("vue-hot-reload-api").rerender("data-v-3af77576", module.exports)
+            }
+        }
+
+        /***/
+    }),
+    /* 42 */
+    /***/ (function (module, exports, __webpack_require__) {
+
+        module.exports = {
+            render: function () {
+            }, staticRenderFns: []
+        }
+        if (false) {
+            module.hot.accept()
+            if (module.hot.data) {
+                require("vue-hot-reload-api").rerender("data-v-e95d60c4", module.exports)
             }
         }
 
@@ -33935,10 +33897,10 @@
         "use strict";
         /* WEBPACK VAR INJECTION */
         (function (global) {/*!
- * Vue.js v2.3.3
- * (c) 2014-2017 Evan You
- * Released under the MIT License.
- */
+         * Vue.js v2.3.3
+         * (c) 2014-2017 Evan You
+         * Released under the MIT License.
+         */
 
 
             /*  */
@@ -43810,113 +43772,6 @@
         __webpack_require__(9);
         module.exports = __webpack_require__(10);
 
-
-        /***/
-    }),
-    /* 48 */,
-    /* 49 */,
-    /* 50 */,
-    /* 51 */,
-    /* 52 */,
-    /* 53 */,
-    /* 54 */,
-    /* 55 */,
-    /* 56 */
-    /***/ (function (module, __webpack_exports__, __webpack_require__) {
-
-        "use strict";
-        Object.defineProperty(__webpack_exports__, "__esModule", {value: true});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-        /* harmony default export */
-        __webpack_exports__["default"] = ({
-            props: ['comments', 'answers']
-        });
-
-        /***/
-    }),
-    /* 57 */
-    /***/ (function (module, exports, __webpack_require__) {
-
-        var Component = __webpack_require__(2)(
-            /* script */
-            __webpack_require__(56),
-            /* template */
-            __webpack_require__(58),
-            /* scopeId */
-            null,
-            /* cssModules */
-            null
-        )
-        Component.options.__file = "D:\\Projects\\PS\\test_solar\\resources\\assets\\js\\components\\comments\\Answers.vue"
-        if (Component.esModule && Object.keys(Component.esModule).some(function (key) {
-                return key !== "default" && key !== "__esModule"
-            })) {
-            console.error("named exports are not supported in *.vue files.")
-        }
-        if (Component.options.functional) {
-            console.error("[vue-loader] Answers.vue: functional components are not supported with templates, they should use render functions.")
-        }
-
-        /* hot reload */
-        if (false) {
-            (function () {
-                var hotAPI = require("vue-hot-reload-api")
-                hotAPI.install(require("vue"), false)
-                if (!hotAPI.compatible) return
-                module.hot.accept()
-                if (!module.hot.data) {
-                    hotAPI.createRecord("data-v-fa8eba7c", Component.options)
-                } else {
-                    hotAPI.reload("data-v-fa8eba7c", Component.options)
-                }
-            })()
-        }
-
-        module.exports = Component.exports
-
-
-        /***/
-    }),
-    /* 58 */
-    /***/ (function (module, exports, __webpack_require__) {
-
-        module.exports = {
-            render: function () {
-                var _vm = this;
-                var _h = _vm.$createElement;
-                var _c = _vm._self._c || _h;
-                return _c('div', {
-                    staticClass: "media-body container"
-                }, [_c('ul', {
-                    staticClass: "media list-group media-list"
-                }, _vm._l((_vm.answers), function (answer) {
-                    return _c('li', {
-                        staticClass: "media list-group-item"
-                    }, [_c('comment', {
-                        attrs: {
-                            "comment": answer,
-                            "comments": _vm.comments
-                        }
-                    })], 1)
-                }))])
-            }, staticRenderFns: []
-        }
-        module.exports.render._withStripped = true
-        if (false) {
-            module.hot.accept()
-            if (module.hot.data) {
-                require("vue-hot-reload-api").rerender("data-v-fa8eba7c", module.exports)
-            }
-        }
 
         /***/
     })
