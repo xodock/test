@@ -12,7 +12,7 @@ npm-debug.log
 /Vagrantfile
 /after.sh
 /aliases
-/public/
+/public/**
 !/public/.htaccess
 !/public/favicon.ico
 !/public/index.php
