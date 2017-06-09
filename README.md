@@ -6,3 +6,10 @@ Dev deploy instruction:
 - do "npm run dev"
 - setup your server environment(web-server, MySQL, php)
 - do "php artisan migrate"
+
+Backend Tests run:
+
+- nix: "phpunit"
+- win: 
+  - git bash: "vendor/bin/phpunit"
+  - cmd: "vendor\bin\phpunit"

@@ -17,21 +17,28 @@ class CommentController extends Controller
     {
         if (!$id)
             return Comment::getCommentsTree()->toJson();
-        return Comment::find($id)->toJson();
+        $comment = Comment::find($id);
+        if ($comment)
+            return $comment->toJson();
+        return;
     }
 
     function update(Request $request, $id)
     {
         $comment = Comment::find($id);
-        $comment->body = $request->body;
-        $comment->save();
-        return $comment->fresh()->toJson();
+        if ($comment) {
+            $comment->body = $request->body;
+            $comment->save();
+            return $comment->fresh()->toJson();
+        }
+        return;
     }
 
     function delete(Request $request, $id)
     {
         $comment = Comment::find($id);
-        $comment->delete();
+        if ($comment)
+            $comment->delete();
         return;
     }
 
