@@ -17,3 +17,4 @@ npm-debug.log
 !/public/favicon.ico
 !/public/index.php
 !/public/robots.txt
+/bash.exe.stackdump
