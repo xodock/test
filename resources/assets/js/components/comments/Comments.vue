@@ -33,22 +33,11 @@
         },
 
         methods: {
-            loadAnswers: function (comment) {
-                this.$http.get("comments/" + comment.id,)
-                    .then(function (response) {
-                        //used the next syntax to make new root-level property reactive
-                        this.$set(comment, 'answers', response.data);
-                    });
-            },
-
             createComment: function () {
                 this.$http.post("comments", this.comment)
                     .then(function (response) {
-                        this.comment.body = '';
-                        this.comment.id = '';
-                        this.comment.parent_id = '';
+                        this.reset();
                         this.readComments();
-                        this.answer = false;
                     });
             },
 
@@ -63,20 +52,15 @@
             updateComment: function (comment_id) {
                 this.$http.put("comments/" + comment_id, this.comment)
                     .then(function (response) {
-                        this.comment.body = '';
-                        this.comment.id = '';
-                        this.comment.parent_id = '';
+                        this.reset();
                         this.readComments();
-                        this.edit = false;
                     });
             },
 
             deleteComment: function (comment_id) {
                 this.$http.delete("comments/" + comment_id)
                     .then(function (response) {
-                        this.comment.body = '';
-                        this.comment.id = '';
-                        this.comment.parent_id = '';
+                        this.reset();
                         this.readComments();
                     });
             },
@@ -91,6 +75,14 @@
             answerComment: function (comment_id) {
                 this.answer = true;
                 this.comment.parent_id = comment_id;
+            },
+
+            reset: function () {
+                this.comment.body = '';
+                this.comment.id = '';
+                this.comment.parent_id = '';
+                this.edit = false;
+                this.answer = false;
             }
         }
     }

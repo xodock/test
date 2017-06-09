@@ -9,7 +9,7 @@ class CommentController extends Controller
 {
     function create(Request $request)
     {
-        $comment = Comment::create($request->toArray());
+        $comment = Comment::create($request->toArray())->fresh();
         return $comment->toJson();
     }
 
@@ -25,7 +25,7 @@ class CommentController extends Controller
         $comment = Comment::find($id);
         $comment->body = $request->body;
         $comment->save();
-        return $comment->toJson();
+        return $comment->fresh()->toJson();
     }
 
     function delete(Request $request, $id)

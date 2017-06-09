@@ -10,6 +10,7 @@ class Comment extends Model
         'answers'
     ];
     protected $fillable = ['body', 'parent_id'];
+    public static $returnable = ['id', 'body', 'parent_id', 'answers'];
 
     public function answers()
     {
