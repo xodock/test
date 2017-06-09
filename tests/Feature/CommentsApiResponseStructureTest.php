@@ -3,21 +3,14 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class CommentsApiResponseStructureTest extends TestCase
 {
+    use \Illuminate\Foundation\Testing\DatabaseMigrations;
     protected $commentStructure = ['id', 'body', 'answers', 'parent_id'];
     protected $endpoint = '/api/comments/';
     protected $table = 'comments';
 
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function testRead()
     {
         $response = $this->get($this->endpoint);
@@ -49,7 +42,7 @@ class CommentsApiResponseStructureTest extends TestCase
         $newCommentData = $response->decodeResponseJson();
         $this->assertDatabaseHas($this->table, $testCommentData);
 
-        $testAnswerData = ['body' => 'Test Answer', 'parent_id' => $newCommentData['id']];
+        $testAnswerData = ['body' => 'Test Answer', 'parent_id' => strval($newCommentData['id'])];
         $answerResponse = $this->json('POST', $this->endpoint, $testAnswerData);
         $answerResponse
             ->assertStatus(200)

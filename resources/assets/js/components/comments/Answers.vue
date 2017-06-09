@@ -1,9 +1,8 @@
 <template>
-    <div class="media-body container">
+    <div class="answers media-body container">
         <ul class="media list-group media-list">
-            <li class="media list-group-item" v-for="answer in answers">
-                <comment :comment=answer :comments=comments></comment>
-            </li>
+            <comment v-for="(answer, index) in answers" :comment=answer :comments=comments :key=index
+                     :index=index></comment>
         </ul>
     </div>
 </template>

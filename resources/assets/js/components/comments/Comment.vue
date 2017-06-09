@@ -1,15 +1,15 @@
 <template>
-    <div class="media-body container">
+    <li class="comment-item media list-group-item" :data-id=comment.id>
         <p class="id">#{{comment.id}}</p>
         <p class="comment_body">{{comment.body}}</p>
-        <a class="btn btn-default" @click="comments.editComment(comment)">Edit</a>
-        <a class="btn btn-danger" @click="comments.deleteComment(comment.id)">Delete</a>
-        <a class="btn btn-default" @click="comments.answerComment(comment.id)">Answer</a>
+        <button class="btn btn-default" @click="comments.editComment(comment, index)">Edit</button>
+        <button class="btn btn-danger" @click="comments.deleteComment(comment, index)">Delete</button>
+        <button class="btn btn-default" @click="comments.answerComment(comment)">Answer</button>
         <answers :answers=comment.answers :comments=comments></answers>
-    </div>
+    </li>
 </template>
 <script>
     export default{
-        props: ['comments', 'comment'],
+        props: ['comments', 'comment', 'index'],
     }
 </script>
