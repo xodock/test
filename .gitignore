@@ -18,3 +18,4 @@ npm-debug.log
 !/public/index.php
 !/public/robots.txt
 /bash.exe.stackdump
+/composer.lock
